@@ -41,25 +41,41 @@ if [ "$API" -lt 23 ]; then
     abort "不支持的 Android 版本: $API"
 fi
 
+ ui_print "##################"
+ ui_print "清理系统缓存"
+ ui_print "##################"
+
+rm -rf /data/magisk_backup_*
+rm -rf /data/resource-cache/*
+rm -rf /data/system/package_cache/*
+rm -rf /cache/*
+ ui_print "##################"
+ ui_print "清理应用缓存"
+ ui_print "##################"
+rm -rf /data/user/0/com.amap.android.location
+rm -rf /data/user/0/com.android.location.fused
+rm -rf /data/user/0/com.xiaomi.location.fused
+rm -rf /data/user/0/com.xiaomi.metoknlp
+rm -rf /data/user/0/com.xiaomi.bsp.gps.nps
+rm -rf /data/user_de/0/com.amap.android.location
+rm -rf /data/user_de/0/com.android.location.fused
+rm -rf /data/user_de/0/com.xiaomi.location.fused
+rm -rf /data/user_de/0/com.xiaomi.metoknlp
+rm -rf /data/user_de/0/com.xiaomi.bsp.gps.nps
+rm -rf /data/misc/profiles/ref
+rm -rf /data/vendor/location
+rm -rf /data/user/0/com.miui.packageinstaller/*
+rm -rf /data/user_de/0/com.miui.packageinstaller/*
+rm -rf /data/app/*/com.miui.packageinstaller*
+rm -rf /data/app/com.miui.packageinstaller*
+rm -rf /data/user/0/com.miui.analytics/*
+rm -rf /data/user_de/0/com.miui.analytics/*
+rm -rf /data/app/*/com.miui.analytics*
+rm -rf /data/app/com.miui.analytics*
+
 # 设置文件权限
 set_perm "$MODPATH/somefile" 0 0 0644
 set_perm_recursive "$MODPATH/somedir" 0 0 0755 0644
-#清理缓存
-rm -rf /data/system/package_cache/*
 
-#禁用I/O调试
-echo 0 > /sys/block/dm-0/queue/iostats
-echo 0 > /sys/block/mmcblk0/queue/iostats
-echo 0 > /sys/block/mmcblk0rpmb/queue/iostats
-echo 0 > /sys/block/mmcblk1/queue/iostats
-echo 0 > /sys/block/loop0/queue/iostats
-echo 0 > /sys/block/loop1/queue/iostats
-echo 0 > /sys/block/loop2/queue/iostats
-echo 0 > /sys/block/loop3/queue/iostats
-echo 0 > /sys/block/loop4/queue/iostats
-echo 0 > /sys/block/loop5/queue/iostats
-echo 0 > /sys/block/loop6/queue/iostats
-echo 0 > /sys/block/loop7/queue/iostats
-echo 0 > /sys/block/sda/queue/iostats
 
 ui_print "自定义安装过程完成"
